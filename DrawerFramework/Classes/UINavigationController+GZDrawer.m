@@ -92,9 +92,9 @@
                             animated:(BOOL)animated {
     
     // Screen capture the current content of the navigation view (alogn with the navigation bar, if any)
-    UIImage *image = [[self class] imageByScreencapturingView:self.view];
+    UIImage *image = [[self class] imageByScreencapturingView:self.view.window];
     
-    CGRect frame = self.view.bounds;
+    CGRect frame = self.view.window.bounds;
     frame.origin.y -= [[self class] statusBarFrameWithView:self.view].size.height;
     
     // Create  button with the screen capture
@@ -106,7 +106,7 @@
     topViewButton.layer.shadowRadius = TOP_VIEW_SHADOW_RADIUS;
     topViewButton.layer.shadowColor = [UIColor blackColor].CGColor;
     topViewButton.layer.shadowOpacity = TOP_VIEW_SHADOW_OPACITY;
-    topViewButton.layer.shadowPath = [UIBezierPath bezierPathWithRect:self.view.layer.bounds].CGPath;
+    topViewButton.layer.shadowPath = [UIBezierPath bezierPathWithRect:self.view.window.layer.bounds].CGPath;
     // Tapping the button closes the drawer
     [topViewButton addTarget:self action:@selector(popDrawerViewController) forControlEvents:UIControlEventTouchUpInside];
     // Add the button to the drawer view controller
@@ -129,6 +129,7 @@
         [swipeGesture release];
     }
     
+    viewController.hidesBottomBarWhenPushed = YES;
     // Make the drawer visible but overlayed with the screen capture
     [self setNavigationBarHidden:YES animated:NO];
     [self pushViewController:viewController animated:NO];
