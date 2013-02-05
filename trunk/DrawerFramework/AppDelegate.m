@@ -61,6 +61,11 @@
     
     drawerTable = [[DrawerFriendlyTableViewController alloc] initWithStyle:UITableViewStylePlain] ;
     
+    // Uncomment the following to see what happens if a tab bar is present
+//    UITabBarController *tbc = [[UITabBarController alloc] init];
+//    tbc.viewControllers = [NSArray arrayWithObject:nav];
+//    self.window.rootViewController = tbc;
+    
     self.window.rootViewController = nav;
     
     
